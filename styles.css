@@ -52,6 +52,56 @@ p{ line-height:1.7; }
 .center{ text-align:center; }
 .script{ font-family: var(--script); color: var(--sunflower-deep); }
 
+.cursor-trail-layer{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 80;
+  overflow: hidden;
+}
+
+.cursor-bloom{
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  margin-top: -11px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(245,197,66,.5) 0, rgba(245,197,66,.18) 42%, rgba(245,197,66,0) 72%);
+  box-shadow: 0 0 26px rgba(245,197,66,.18);
+  opacity: 0;
+  transform: translate(-999px, -999px);
+  transition: opacity .2s ease;
+}
+
+.cursor-bloom.visible{
+  opacity: 1;
+}
+
+.cursor-flower{
+  position: absolute;
+  margin-left: -8px;
+  margin-top: -8px;
+  font-size: 14px;
+  line-height: 1;
+  opacity: .92;
+  filter: drop-shadow(0 4px 6px rgba(138,90,43,.18));
+  animation: cursorPetalFloat 920ms ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes cursorPetalFloat{
+  0%{
+    transform: translate(0, 0) rotate(0deg) scale(.9);
+    opacity: .9;
+  }
+  100%{
+    transform: translate(var(--drift-x, 0px), var(--drift-y, 34px)) rotate(var(--spin, 12deg)) scale(1.18);
+    opacity: 0;
+  }
+}
+
 .bg-audio{ display:none; }
 
 .music-toggle{
@@ -638,5 +688,11 @@ p{ line-height:1.7; }
     flex-basis: 56px;
     width:56px;
     height:56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .cursor-trail-layer{
+    display:none;
   }
 }

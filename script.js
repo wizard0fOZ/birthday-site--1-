@@ -7,6 +7,7 @@ const BG_MUSIC_VOLUME = 0.08;
 const MUSIC_PREF_KEY = "birthday-music-enabled";
 const MUSIC_TIME_KEY = "birthday-music-time";
 const MUSIC_ENGAGED_KEY = "birthday-music-engaged";
+const CURSOR_FLOWERS = ["✿", "❀", "🌼"];
 
 /* Floating sunflower petals + music notes background */
 function spawnFloaters(symbols = ["🌻", "🌼", "✿"], count = 18){
@@ -24,6 +25,77 @@ function spawnFloaters(symbols = ["🌻", "🌼", "✿"], count = 18){
     f.style.animationDelay = -Math.random() * dur + "s";
     layer.appendChild(f);
   }
+}
+
+function attachCursorTrail(){
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+  if(prefersReducedMotion || !hasFinePointer) return;
+
+  const layer = document.createElement("div");
+  const bloom = document.createElement("div");
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let bloomX = mouseX;
+  let bloomY = mouseY;
+  let rafId = null;
+  let lastTrailAt = 0;
+
+  layer.className = "cursor-trail-layer";
+  bloom.className = "cursor-bloom";
+  layer.appendChild(bloom);
+  document.body.appendChild(layer);
+
+  function renderBloom(){
+    bloomX += (mouseX - bloomX) * 0.22;
+    bloomY += (mouseY - bloomY) * 0.22;
+    bloom.style.transform = `translate(${bloomX}px, ${bloomY}px)`;
+    rafId = window.requestAnimationFrame(renderBloom);
+  }
+
+  function spawnTrail(x, y){
+    const petal = document.createElement("span");
+    petal.className = "cursor-flower";
+    petal.textContent = CURSOR_FLOWERS[Math.floor(Math.random() * CURSOR_FLOWERS.length)];
+    petal.style.left = `${x}px`;
+    petal.style.top = `${y}px`;
+    petal.style.setProperty("--drift-x", `${(Math.random() * 34) - 17}px`);
+    petal.style.setProperty("--drift-y", `${26 + Math.random() * 28}px`);
+    petal.style.setProperty("--spin", `${-24 + Math.random() * 48}deg`);
+    petal.style.animationDuration = `${780 + Math.random() * 260}ms`;
+    layer.appendChild(petal);
+    window.setTimeout(()=> petal.remove(), 1200);
+  }
+
+  document.addEventListener("pointermove", (event)=>{
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+    bloom.classList.add("visible");
+
+    const now = performance.now();
+    if(now - lastTrailAt > 55){
+      spawnTrail(mouseX, mouseY);
+      lastTrailAt = now;
+    }
+  });
+
+  document.addEventListener("pointerdown", (event)=>{
+    spawnTrail(event.clientX, event.clientY);
+    spawnTrail(event.clientX + 8, event.clientY - 6);
+  });
+
+  document.addEventListener("pointerleave", ()=>{
+    bloom.classList.remove("visible");
+  });
+
+  document.addEventListener("visibilitychange", ()=>{
+    if(document.hidden) bloom.classList.remove("visible");
+  });
+
+  rafId = window.requestAnimationFrame(renderBloom);
+  window.addEventListener("pagehide", ()=>{
+    if(rafId) window.cancelAnimationFrame(rafId);
+  }, { once: true });
 }
 
 function attachBackgroundMusic(){
@@ -191,6 +263,7 @@ function attachLightbox(){
 }
 
 document.addEventListener("DOMContentLoaded", ()=>{
+  attachCursorTrail();
   attachBackgroundMusic();
   attachPageTransitions();
   attachScrollReveal();
