@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Final Surprise 🎁</title>
+<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a class="back" href="garden.html" data-transition>← garden</a>
+
+  <main class="page center">
+    <div class="container">
+      <p class="script" style="font-size:1.6rem;">one last thing…</p>
+      <h1>Tap the sunflower 🌻</h1>
+      <div style="margin:30px 0;">
+        <span class="big-heart" id="heart">🌻</span>
+      </div>
+      <p id="finalMsg" style="max-width:520px;margin:0 auto;color:var(--muted);font-size:1.05rem;">
+        (a little surprise is hiding here)
+      </p>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    spawnFloaters(["🌻","🌼","🤍","❤️"], 22);
+
+    // the final surprise message
+    const FINAL_MSG = "I love you — today, tomorrow, and every quiet ordinary day after. happy birthday, my sunflower. 🌻";
+
+    document.getElementById("heart").addEventListener("click", ()=>{
+      const m = document.getElementById("finalMsg");
+      m.style.transition = "opacity .5s ease, transform .5s ease";
+      m.style.opacity = "0";
+      setTimeout(()=>{
+        m.innerHTML = `<span style="font-family:var(--script);font-size:1.6rem;color:var(--golden-brown);">${FINAL_MSG}</span>`;
+        m.style.opacity = "1";
+      }, 420);
+      // burst of petals
+      for(let i=0;i<30;i++){
+        const f = document.createElement("span");
+        f.className = "floater";
+        f.textContent = ["🌻","🌼","🤍","❤️"][i%4];
+        f.style.left = (40 + Math.random()*20) + "vw";
+        f.style.bottom = "20vh";
+        f.style.fontSize = (16 + Math.random()*22) + "px";
+        f.style.animationDuration = (8 + Math.random()*6) + "s";
+        document.querySelector(".floaters").appendChild(f);
+      }
+    });
+  </script>
+</body>
+</html>

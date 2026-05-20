@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Garden 🌻</title>
+<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="page">
+    <div class="container center">
+      <p class="script" style="font-size:1.5rem;">welcome to your garden</p>
+      <h1>Pick a sunflower path 🌻</h1>
+      <p style="color:var(--muted);max-width:520px;margin:10px auto 0;">
+        Wander wherever your heart takes you — there’s no wrong way through.
+      </p>
+
+      <!-- Garden Menu -->
+      <section class="menu-grid">
+        <a class="menu-card" href="letter.html"  data-transition>
+          <span class="ico">💌</span><h3>Birthday Letter</h3><p>A few words straight from me.</p>
+        </a>
+        <a class="menu-card" href="gallery.html" data-transition>
+          <span class="ico">📷</span><h3>Our Pictures</h3><p>Little frozen moments of us.</p>
+        </a>
+        <a class="menu-card" href="bouquet.html" data-transition>
+          <span class="ico">🌻</span><h3>Sunflower Bouquet</h3><p>Pick each one for a reason.</p>
+        </a>
+        <a class="menu-card" href="music.html"   data-transition>
+          <span class="ico">🎵</span><h3>Songs</h3><p>Tunes that remind me of you.</p>
+        </a>
+        <a class="menu-card" href="openwhen.html" data-transition>
+          <span class="ico">✉️</span><h3>Open When</h3><p>Little notes for little moments.</p>
+        </a>
+        <a class="menu-card" href="final.html"   data-transition>
+          <span class="ico">🎁</span><h3>Final Surprise</h3><p>Save this one for last.</p>
+        </a>
+      </section>
+    </div>
+  </main>
+  <script src="script.js"></script>
+  <script>spawnFloaters(["🌻","🌼","✿","🌿"], 16);</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Songs 🎵</title>
+<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a class="back" href="garden.html" data-transition>&larr; garden</a>
+
+  <main class="page">
+    <div class="container center">
+      <p class="script" style="font-size:1.5rem;">a little playlist</p>
+      <h1>Songs that remind me of you 🎵</h1>
+      <p style="color:var(--muted);max-width:520px;margin:10px auto 0;">
+        Press play whenever you miss me.
+      </p>
+
+      <!--
+        5 songs to fill your heart.
+        Cover files: assets/cover1.jpg to assets/cover5.jpg
+      -->
+      <section class="music-grid">
+        <article class="song">
+          <div class="song-top">
+            <a class="song-cover" href="https://open.spotify.com/track/5PL0PtPlaSjH6eQdA9WfFS?si=46158d59028f4466" target="_blank" rel="noopener" aria-label="Open Imaye">
+              <img src="assets/cover1.jpg" alt="Cover art for Imaye" onerror="this.style.display='none'; this.parentNode.classList.add('missing');">
+            </a>
+            <div class="song-copy">
+              <div class="title">Imaye</div>
+              <div class="artist">Must Date the Playboy</div>
+              <p class="note">“You make love feel soft, unexpected, and real.”</p>
+            </div>
+          </div>
+          <a class="btn" href="https://open.spotify.com/track/5PL0PtPlaSjH6eQdA9WfFS?si=46158d59028f4466" target="_blank" rel="noopener">Listen ♫</a>
+        </article>
+        <article class="song">
+          <div class="song-top">
+            <a class="song-cover" href="https://open.spotify.com/track/0EDgUNdoWnRslGw6epuJY9?si=321c0207e58a480d" target="_blank" rel="noopener" aria-label="Open Anything You Want">
+              <img src="assets/cover2.jpg" alt="Cover art for Anything You Want" onerror="this.style.display='none'; this.parentNode.classList.add('missing');">
+            </a>
+            <div class="song-copy">
+              <div class="title">Anything You Want</div>
+              <div class="artist">Reality Club</div>
+              <p class="note">“This reminds me of how I’d choose you in every little version of life.”</p>
+            </div>
+          </div>
+          <a class="btn" href="https://open.spotify.com/track/0EDgUNdoWnRslGw6epuJY9?si=321c0207e58a480d" target="_blank" rel="noopener">Listen ♫</a>
+        </article>
+        <article class="song">
+          <div class="song-top">
+            <a class="song-cover" href="https://open.spotify.com/track/2aL4lMGhWdPpyPL6COPou7?si=8d421163a41e4de6" target="_blank" rel="noopener" aria-label="Open Soft Spot">
+              <img src="assets/cover3.jpg" alt="Cover art for Soft Spot" onerror="this.style.display='none'; this.parentNode.classList.add('missing');">
+            </a>
+            <div class="song-copy">
+              <div class="title">Soft Spot</div>
+              <div class="artist">keshi</div>
+              <p class="note">“Because you’ll always be my soft spot, no matter what mood I’m in.”</p>
+            </div>
+          </div>
+          <a class="btn" href="https://open.spotify.com/track/2aL4lMGhWdPpyPL6COPou7?si=8d421163a41e4de6" target="_blank" rel="noopener">Listen ♫</a>
+        </article>
+        <article class="song">
+          <div class="song-top">
+            <a class="song-cover" href="https://open.spotify.com/track/6fGJY9dTvjOYbXSzwqRfs4?si=d3fc8213319e4e7f" target="_blank" rel="noopener" aria-label="Open Azhage">
+              <img src="assets/cover4.jpg" alt="Cover art for Azhage" onerror="this.style.display='none'; this.parentNode.classList.add('missing');">
+            </a>
+            <div class="song-copy">
+              <div class="title">Azhage</div>
+              <div class="artist">Kathakali</div>
+              <p class="note">“Because you are my azhage, my beautiful girl, in every way that matters.”</p>
+            </div>
+          </div>
+          <a class="btn" href="https://open.spotify.com/track/6fGJY9dTvjOYbXSzwqRfs4?si=d3fc8213319e4e7f" target="_blank" rel="noopener">Listen ♫</a>
+        </article>
+        <article class="song">
+          <div class="song-top">
+            <a class="song-cover" href="https://open.spotify.com/track/6OEY4EgyHxwJ8IhanTnvEL?si=1d0f7bfe04534202" target="_blank" rel="noopener" aria-label="Open Vizhi Veekura">
+              <img src="assets/cover5.jpg" alt="Cover art for Vizhi Veekura" onerror="this.style.display='none'; this.parentNode.classList.add('missing');">
+            </a>
+            <div class="song-copy">
+              <div class="title">Vizhi Veekura</div>
+              <div class="artist">Sai Abhyankkar</div>
+              <p class="note">“This feels like your smile, bright, sweet, and impossible not to think about.”</p>
+            </div>
+          </div>
+          <a class="btn" href="https://open.spotify.com/track/6OEY4EgyHxwJ8IhanTnvEL?si=1d0f7bfe04534202" target="_blank" rel="noopener">Listen ♫</a>
+        </article>
+      </section>
+    </div>
+  </main>
+  <script src="script.js"></script>
+  <script>spawnFloaters(["♪","♫","🌻","🌼"], 18);</script>
+</body>
+</html>

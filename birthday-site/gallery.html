@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Our Pictures 📷</title>
+<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a class="back" href="garden.html" data-transition>&larr; garden</a>
+
+  <main class="page">
+    <div class="container center">
+      <p class="script" style="font-size:1.5rem;">moments of us</p>
+      <h1>Our little memories 📷</h1>
+      <p style="color:var(--muted);max-width:520px;margin:10px auto 0;">
+        Tap any photo to see it bigger.
+      </p>
+
+      <!--
+        caption: data-caption.
+        media source: data-src.
+        media kind: data-media ("image" or "video").
+      -->
+      <section class="gallery-grid">
+        <figure class="polaroid reveal from-left" data-src="assets/1.MP4" data-media="video" data-caption="our very first day">
+          <div class="frame">
+            <video src="assets/1.MP4" muted playsinline preload="metadata" onerror="this.style.display='none'; this.parentNode.textContent='🌻';"></video>
+          </div>
+          <figcaption>Our Photobooth moments</figcaption>
+        </figure>
+        <figure class="polaroid reveal from-right" data-src="assets/2.JPEG" data-media="image" data-caption="that sunny afternoon">
+          <div class="frame"><img src="assets/2.JPEG" alt="memory 2" onerror="this.style.display='none'; this.parentNode.textContent='🌼';"></div>
+          <figcaption>Who's eye bigger 👀</figcaption>
+        </figure>
+        <figure class="polaroid reveal from-left" data-src="assets/3.JPEG" data-media="image" data-caption="laughing too loud">
+          <div class="frame"><img src="assets/3.JPEG" alt="memory 3" onerror="this.style.display='none'; this.parentNode.textContent='✿';"></div>
+          <figcaption>Nail artist at work</figcaption>
+        </figure>
+        <figure class="polaroid reveal from-right" data-src="assets/4.JPEG" data-media="image" data-caption="our quiet evening">
+          <div class="frame"><img src="assets/4.JPEG" alt="memory 4" onerror="this.style.display='none'; this.parentNode.textContent='🌻';"></div>
+          <figcaption>The azhagi in her saree (adore you everyday)</figcaption>
+        </figure>
+        <figure class="polaroid reveal from-left" data-src="assets/5.JPEG" data-media="image" data-caption="that silly trip">
+          <div class="frame"><img src="assets/5.JPEG" alt="memory 5" onerror="this.style.display='none'; this.parentNode.textContent='🌼';"></div>
+          <figcaption>Date ride (my god my face 😭)</figcaption>
+        </figure>
+        <figure class="polaroid reveal from-right" data-src="assets/6.JPEG" data-media="image" data-caption="just us, just because">
+          <div class="frame"><img src="assets/6.JPEG" alt="memory 6" onerror="this.style.display='none'; this.parentNode.textContent='✿';"></div>
+          <figcaption>The kutty paapaa that i'll never forget</figcaption>
+        </figure>
+        <figure class="polaroid reveal from-left" data-src="assets/7.JPEG" data-media="image" data-caption="my favourite smile">
+          <div class="frame"><img src="assets/7.JPEG" alt="memory 7" onerror="this.style.display='none'; this.parentNode.textContent='🌻';"></div>
+          <figcaption>Shy paapaa with her flowers hehe 🌻🌻</figcaption>
+        </figure>
+        <figure class="polaroid reveal from-right" data-src="assets/8.JPEG" data-media="image" data-caption="more to come 🌻">
+          <div class="frame"><img src="assets/8.JPEG" alt="memory 8" onerror="this.style.display='none'; this.parentNode.textContent='🌼';"></div>
+          <figcaption>Artist strikes again with hand painting</figcaption>
+        </figure>
+      </section>
+    </div>
+  </main>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" aria-label="Close">&times;</button>
+    <div class="lb-inner">
+      <div class="lb-frame"></div>
+      <div class="lb-cap"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>spawnFloaters(["🌻","🌼"], 10);</script>
+</body>
+</html>

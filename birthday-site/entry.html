@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>A little something for you 🌻</title>
+<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="page center">
+    <div class="container" style="max-width:520px;">
+      <p class="script" style="font-size:1.5rem;">psst…</p>
+      <h1>Enter the secret</h1>
+      <p style="color:var(--muted);margin:10px 0 24px;">
+        A little hint — it’s the day the world got you. 🎂
+      </p>
+
+      <form id="entryForm" autocomplete="off">
+        <!-- maxlength matches passcode length -->
+        <input class="input" id="code" type="password" inputmode="numeric"
+               maxlength="4" placeholder="• • • •" required />
+        <div style="margin-top:18px;">
+          <button class="btn" type="submit">Unlock the garden</button>
+        </div>
+        <p id="err" style="color:#b04848;margin-top:14px;min-height:1.2em;font-size:.95rem;"></p>
+      </form>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    // Passcode for the page
+    const PASSCODE = "1406";
+
+    spawnFloaters(["🌻","🌼","✿"], 14);
+
+    const form = document.getElementById("entryForm");
+    const err  = document.getElementById("err");
+    form.addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const val = document.getElementById("code").value.trim();
+      if(val === PASSCODE){
+        err.textContent = "";
+        document.body.style.transition = "opacity .5s ease";
+        document.body.style.opacity = "0";
+        setTimeout(()=>{ window.location.href = "garden.html"; }, 480);
+      } else {
+        err.textContent = "Not quite — try again 🌼";
+        form.querySelector(".input").value = "";
+      }
+    });
+  </script>
+</body>
+</html>

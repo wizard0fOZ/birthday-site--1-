@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Birthday Letter 💌</title>
+<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a class="back" href="garden.html" data-transition>← garden</a>
+
+  <main class="page">
+    <div class="container center">
+      <p class="script" style="font-size:1.5rem;">a letter for you</p>
+      <h1>On your birthday 🌻</h1>
+
+      <article class="letter-paper">
+        <span class="typed" id="letter"></span>
+      </article>
+
+      <div style="margin-top:28px;">
+        <a class="btn ghost" href="garden.html" data-transition>Back to the garden</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    spawnFloaters(["🌻","🌼"], 10);
+
+    // Birthday Letter.
+    const LETTER_TEXT =
+`Hepi birthday, Sya paapaa 🌻🤍
+
+Being with you is truly one of the best things that has happened to me. Since you came into my life, everything has felt a little brighter, warmer, and more meaningful. You make ordinary days feel special just by being there.
+
+And to think it all started from that chai sesh ☕ Something so simple somehow became the beginning of something really special to me. I still think about how easy it felt to sit with you, talk, laugh, and not want the moment to end. Since then, you’ve become my best friend, my favorite foodie, my safe place, and my favorite person.
+
+I’m so grateful for every laugh, every random conversation, every food hunt, and every little memory we’ve made together. I love your kindness, your controlled chaos, your energy, and the way you care for the people around you. I love all the little things that make you, you.
+
+Welcome to the 22 Y/O club, Sya I hope this year brings you all the happiness, love, success, good food, and sunflower moments you deserve.
+
+No matter where life takes us, I hope you always remember this: you are deeply loved, endlessly appreciated, and so special to me.
+
+I can’t wait for more chai sesh, more food hunts, more laughs, and more moments where I look at you and think, “Yeah, she’s my person.”
+
+Hepi birthday again, paapaa.
+
+I love you more than words can explain ❤️🤍`;
+
+    const target = document.getElementById("letter");
+    let i = 0;
+    function type(){
+      if(i <= LETTER_TEXT.length){
+        target.textContent = LETTER_TEXT.slice(0, i);
+        i++;
+        setTimeout(type, 35); // typing speed
+      }
+    }
+    setTimeout(type, 400);
+  </script>
+</body>
+</html>

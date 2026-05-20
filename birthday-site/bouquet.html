@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sunflower Bouquet 🌻</title>
+<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a class="back" href="garden.html" data-transition>&larr; garden</a>
+
+  <main class="page bouquet-page">
+    <div class="container">
+      <div class="bouquet-layout">
+        <section class="bouquet-visual" aria-label="Bouquet for you">
+          <div class="bouquet-frame">
+            <img src="assets/sunflower_bouquet_transperant.png" alt="A bouquet with sunflowers, roses, lilies, and daisies" />
+          </div>
+        </section>
+
+        <section class="bouquet-copy">
+          <p class="script bouquet-kicker">pick a sunflower</p>
+          <h1>Reasons I love you 🌻</h1>
+          <p class="bouquet-intro">
+            I wanted to leave this bouquet here for you too. Pick a sunflower whenever you want a little reminder from me.
+          </p>
+
+          <div class="reason-box" id="reasonBox" aria-live="polite">
+            <p class="reason-box-label" id="reasonLabel">sunflower note</p>
+            <h2 class="reason-box-title" id="reasonTitle">Click a sunflower to begin 🌼</h2>
+            <p class="reason-box-text" id="reasonText">
+              Each one is holding a little piece of what I adore about you.
+            </p>
+          </div>
+
+          <div class="pick-progress" id="pickProgress">0 of 5 sunflowers picked</div>
+          <div class="sunflower-picks" id="sunflowerPicks"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    spawnFloaters(["🌻","🌼","🌿"], 14);
+
+    // EDIT: reasons texts.
+
+    const REASONS = [
+      {
+        title: "Your warmth",
+        message: "You make even ordinary days feel softer and brighter, and somehow you turn the simplest moments into the ones I want to keep forever."
+      },
+      {
+        title: "Your heart",
+        message: "The way you care for people is one of the gentlest things I have ever known, and I love how naturally kind you are without ever making it look forced."
+      },
+      {
+        title: "Your laugh",
+        message: "I love the way your laugh sneaks up on you, because the second I hear it, everything in me wants to stay in that moment a little longer."
+      },
+      {
+        title: "Your love",
+        message: "You make love feel safe, steady, and real. Being loved by you feels like being chosen in all the quiet ways that matter most."
+      },
+      {
+        title: "Your magic",
+        message: "There is just something about you that makes life feel more alive. You make me excited for the future because getting to share it with you feels so special."
+      }
+    ];
+
+    // EDIT: final line revealed after all sunflowers are picked
+    const FINAL_LINE = {
+      title: "And that is only the beginning",
+      message: "Even after these five sunflowers, I still have so many more reasons left. This bouquet just happens to be where I started."
+    };
+
+    const STORAGE_KEY = "birthday-bouquet-picked";
+
+    const picksWrap = document.getElementById("sunflowerPicks");
+    const progress = document.getElementById("pickProgress");
+    const label = document.getElementById("reasonLabel");
+    const title = document.getElementById("reasonTitle");
+    const text = document.getElementById("reasonText");
+    const copyPanel = document.querySelector(".bouquet-copy");
+
+    function loadPickedSet(){
+      try {
+        const saved = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "[]");
+        return new Set(saved.filter((idx)=> Number.isInteger(idx) && idx >= 0 && idx < REASONS.length));
+      } catch {
+        return new Set();
+      }
+    }
+
+    const pickedSet = loadPickedSet();
+
+    function sunflowerSVG(){
+      return `
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g class="petals" fill="#f5c542">
+            ${Array.from({length:12}).map((_,i)=>{
+              const a = (i*30) * Math.PI/180;
+              const cx = 50 + Math.cos(a)*26;
+              const cy = 50 + Math.sin(a)*26;
+              return `<ellipse cx="${cx}" cy="${cy}" rx="9" ry="16" transform="rotate(${i*30} ${cx} ${cy})"/>`;
+            }).join("")}
+          </g>
+          <circle cx="50" cy="50" r="14" fill="#6b3f12"/>
+          <circle cx="50" cy="50" r="10" fill="#8a5a2b"/>
+        </svg>`;
+    }
+
+    function flashBox(){
+      const box = document.getElementById("reasonBox");
+      box.classList.remove("flash");
+      void box.offsetWidth;
+      box.classList.add("flash");
+    }
+
+    function updateBox(note, finished = false){
+      label.textContent = finished ? "all sunflowers picked" : "sunflower note";
+      title.textContent = note.title;
+      text.textContent = note.message;
+      flashBox();
+    }
+
+    function renderProgress(){
+      const pickedCount = pickedSet.size;
+      progress.textContent = `${pickedCount} of ${REASONS.length} sunflowers picked`;
+      copyPanel.classList.toggle("complete", pickedCount === REASONS.length);
+    }
+
+    function persistPicked(){
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify([...pickedSet]));
+    }
+
+    function checkDone(){
+      if(pickedSet.size === REASONS.length){
+        updateBox(FINAL_LINE, true);
+      }
+    }
+
+    REASONS.forEach((reason, idx)=>{
+      const button = document.createElement("button");
+      const number = String(idx + 1).padStart(2, "0");
+      const wasPicked = pickedSet.has(idx);
+
+      button.className = "sunflower-pick";
+      if(wasPicked) button.classList.add("picked");
+      button.setAttribute("type", "button");
+      button.setAttribute("aria-pressed", wasPicked ? "true" : "false");
+      button.setAttribute("aria-label", `Open sunflower ${idx + 1}: ${reason.title}`);
+      button.style.animationDelay = `${idx * 0.12}s`;
+      button.innerHTML = `
+        <span class="sunflower-pick-art" aria-hidden="true">${sunflowerSVG()}</span>
+        <span class="sunflower-pick-meta">
+          <span class="sunflower-pick-number">${number}</span>
+          <span class="sunflower-pick-title">${reason.title}</span>
+        </span>
+      `;
+
+      button.addEventListener("click", ()=>{
+        pickedSet.add(idx);
+        persistPicked();
+        button.classList.add("picked");
+        button.setAttribute("aria-pressed", "true");
+        updateBox(reason);
+        renderProgress();
+        checkDone();
+      });
+
+      picksWrap.appendChild(button);
+    });
+
+    if(pickedSet.size === REASONS.length){
+      updateBox(FINAL_LINE, true);
+    } else if(pickedSet.size > 0){
+      const lastPicked = [...pickedSet].sort((a, b)=>a - b).at(-1);
+      if(lastPicked !== undefined){
+        updateBox(REASONS[lastPicked]);
+      }
+    }
+
+    renderProgress();
+  </script>
+</body>
+</html>

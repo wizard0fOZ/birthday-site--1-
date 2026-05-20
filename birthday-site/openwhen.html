@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Open When ✉️</title>
+<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Dancing+Script:wght@500;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a class="back" href="garden.html" data-transition>← garden</a>
+
+  <main class="page">
+    <div class="container center">
+      <p class="script" style="font-size:1.5rem;">little envelopes</p>
+      <h1>Open when… ✉️</h1>
+      <p style="color:var(--muted);max-width:520px;margin:10px auto 0;">
+        Tap an envelope when the moment fits.
+      </p>
+
+      <!-- title and message on each envelope below -->
+      <section class="openwhen-grid">
+        <div class="envelope" onclick="this.classList.toggle('open')">
+          <span class="seal">✉️</span>
+          <h3>Open when you miss me</h3>
+          <p class="msg">close your eyes — i’m already thinking about you. 🌻</p>
+        </div>
+        <div class="envelope" onclick="this.classList.toggle('open')">
+          <span class="seal">💛</span>
+          <h3>Open when you’re sad</h3>
+          <p class="msg">you’re my favourite person. nothing changes that, ever.</p>
+        </div>
+        <div class="envelope" onclick="this.classList.toggle('open')">
+          <span class="seal">🌼</span>
+          <h3>Open when you’re tired</h3>
+          <p class="msg">rest. i’ll be here when you wake up. always.</p>
+        </div>
+        <div class="envelope" onclick="this.classList.toggle('open')">
+          <span class="seal">✨</span>
+          <h3>Open when you doubt yourself</h3>
+          <p class="msg">you are so much more than you know. i see it every day.</p>
+        </div>
+        <div class="envelope" onclick="this.classList.toggle('open')">
+          <span class="seal">🌻</span>
+          <h3>Open when you’re happy</h3>
+          <p class="msg">tell me everything — i love your happy voice the most.</p>
+        </div>
+        <div class="envelope" onclick="this.classList.toggle('open')">
+          <span class="seal">🤍</span>
+          <h3>Open whenever</h3>
+          <p class="msg">i love you. that’s the whole message.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="script.js"></script>
+  <script>spawnFloaters(["✉️","🌻","🌼"], 14);</script>
+</body>
+</html>
